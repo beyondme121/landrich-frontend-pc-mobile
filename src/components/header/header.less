@@ -1,0 +1,193 @@
+// PC端
+@media(min-width: 992px) {
+  header {
+    height: 80px;
+    width: 100%;
+    padding: 0 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    box-shadow: 0 0 3px 3px #ccc;
+
+    .logo {
+      // width: 26%;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-font-color);
+    }
+
+    nav {
+      width: 60%;
+      display: flex;
+      // 纵轴: 居中对齐
+      align-items: center;
+      // 横轴左对齐         
+      justify-content: flex-start;
+
+      ul {
+        display: flex;
+        margin-bottom: 0;
+
+        li {
+          a {
+            color: var(--text-color-darker);
+            padding: 0 40px;
+            font-size: var(--font20);
+
+            // 鼠标悬停效果
+            &:hover {
+              // -webkit-transform: translateY(-3px);
+              // -ms-transform: translateY(-3px);
+              // transform: translateY(-3px);
+              -webkit-box-shadow: 0 0 6px #999;
+              box-shadow: 0 0 6px #999;
+              -webkit-transition: all .5s ease-out;
+              transition: all .5s ease-out;
+              color: var(--primary-color);
+            }
+          }
+        }
+      }
+    }
+
+    .userinfo {
+      display: flex;
+      justify-content: center;
+
+      span {
+        font-size: 16px;
+        padding: 0 20px;
+        color: var(--text-color-gray);
+        cursor: pointer;
+
+        &:hover {
+          transition: all .5s ease-out;
+          color: var(--primary-color);
+          cursor: pointer;
+        }
+      }
+    }
+
+    .phoneIcon {
+      display: none;
+    }
+  }
+}
+
+// 平板或手机屏幕
+@media(max-width: 991px) {
+  @keyframes slideDown {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+
+    to {
+      height: 30vh;
+      padding-top: 0px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      height: 30vh;
+      padding-top: 0px;
+      opacity: 1;
+    }
+
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  header {
+    height: 80px;
+    width: 100vw;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    box-shadow: 0 0 3px 3px #ccc;
+
+    .logo {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-font-color);
+    }
+
+    .init {
+      display: none;
+    }
+
+    .closed {
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.7);
+      position: absolute;
+      top: 80px;
+      left: 0;
+      z-index: 100;
+      animation: slideUp 0.6s ease-out forwards;
+
+      ul li {
+        width: 100vw;
+        border-bottom: 1px dotted rgba(0, 0, 0, .3);
+        line-height: 46px;
+        text-align: left;
+        font-size: 16px;
+        padding: 0 5%;
+        color: #fff;
+
+        a {
+          font-size: 16px;
+          color: #fff;
+        }
+      }
+    }
+
+    // 点击按钮 菜单打开后
+    .open {
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.7);
+      position: absolute;
+      top: 80px;
+      left: 0;
+      z-index: 100;
+      animation: slideDown 0.6s ease-out forwards;
+
+      ul li {
+        width: 100vw;
+        border-bottom: 1px dotted rgba(0, 0, 0, .3);
+        line-height: 46px;
+        text-align: left;
+        font-size: 16px;
+        padding: 0 5%;
+        color: #fff;
+
+        a {
+          font-size: 16px;
+          color: #fff;
+        }
+      }
+    }
+
+
+    .phoneIcon {
+      display: block;
+      background: url(../../assets/images/phoneIcon.jpg) no-repeat;
+      width: 31px;
+      height: 26px;
+      cursor: pointer;
+      background-size: 100% auto;
+    }
+
+
+
+    .userinfo {
+      display: none;
+    }
+  }
+}
