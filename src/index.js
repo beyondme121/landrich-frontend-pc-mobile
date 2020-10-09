@@ -13,7 +13,6 @@ import './index.less'
 import './assets/style/key-frames.css'
 
 import App from './App.jsx'
-// import Home from './pages/home/home'
 
 ReactDOM.render(
   <Provider store={store}>

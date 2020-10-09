@@ -8,7 +8,6 @@ const save_cards = (data) => ({ type: SAVE_MENUCARDS, data })
 export const asyncReqMenuCards = () => {
   return async (dispatch) => {
     const { code, data } = await reqMenuCards()
-    console.log('data: ', data)
     if (code === 0) {
       dispatch(save_cards(data))
     } else {

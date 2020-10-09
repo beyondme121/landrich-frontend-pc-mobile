@@ -7,6 +7,7 @@ import { asyncReqMenuCards } from '../../redux/actions/menu-action'
 import Header from '../../components/header/header'
 import Swiper from '../../components/swiper/swiper'
 import ImageSection from '../../components/image-section/section'
+import Footer from '../../components/footer/footer'
 import './home.less'
 
 function HomeIndex(props) {
@@ -43,7 +44,6 @@ function HomeIndex(props) {
 
   return (
     <div className="home-container">
-      <Header />
       <Swiper />
       <ImageSection title="What's NEW" type="news" data={menuCards} />
       <ImageSection title="Shortcut" type="shortcut" data={menuCards} />

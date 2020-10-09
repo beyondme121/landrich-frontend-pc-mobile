@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 
 import Login from './pages/login/login'
-import Home from './pages/home/home'
+import Main from './pages/main/main'
 import './App.css'
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
     <Router>
       <Switch>
         <Route path='/login' component={Login} />
-        <Route path='/' component={Home} />
+        <Route path='/' component={Main} />
       </Switch>
     </Router>
   )

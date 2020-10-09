@@ -4,8 +4,12 @@ import { serverStaticPath } from '../../config/config'
 import './section.less'
 
 const Section = memo(function Section(props) {
-  let { title, type, data, children } = props
-  console.log(title, type, data, children)
+  let {
+    title,
+    type,
+    data,
+    // children 
+  } = props
   const renderSection = useMemo(() => {
     let result = data && data.filter(item => item.homepage_type === type)
     let res = result && result.reduce((pre, item, index) => {
@@ -16,7 +20,7 @@ const Section = memo(function Section(props) {
               <img src={serverStaticPath + item.coverImg} alt="" />
               {/* <div className="backdrop"></div> */}
               <p className="section-item-info">{item.title}</p>
-              {children}
+              {/* {children} */}
             </a>
           )
         } else if (item.path.startsWith('/')) {
@@ -28,7 +32,7 @@ const Section = memo(function Section(props) {
               <img src={serverStaticPath + item.coverImg} alt="" />
               {/* <div className="backdrop"></div> */}
               <p className="section-item-info">{item.title}</p>
-              {children}
+              {/* {children} */}
             </Link>
           )
         }
@@ -44,7 +48,7 @@ const Section = memo(function Section(props) {
             <img src={serverStaticPath + item.coverImg} alt="" />
             {/* <div className="backdrop"></div> */}
             <p className="section-item-info">{item.title}</p>
-            {children}
+            {/* {children} */}
           </Link>
         )
       }
@@ -53,7 +57,7 @@ const Section = memo(function Section(props) {
 
     let final = res && res.concat(noLinkRes)
     return final
-  }, [title, type, data])
+  }, [type, data])
 
 
   return (

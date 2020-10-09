@@ -1,0 +1,64 @@
+@media(min-width: 992px) {
+  .template-container {
+    width: 80%;
+    margin: 10px auto;
+    position: relative;
+    .template-title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 26px;
+      margin: 10px 0;
+    }
+    
+    .card-item {
+      width: 20%;
+      display: inline-block;
+      padding: 8px;
+    }
+  }
+  // Tab标签的设置 标签tab的设置
+  .ant-tabs-nav-wrap {
+    margin: 10px;
+  }
+
+
+  .ant-card-meta-title {
+    white-space: nowrap;
+    font-size: 10px!important;
+    text-align: center;
+  }
+
+  .ant-tabs-tab {
+    user-select: none;
+  }
+
+}
+
+@media(max-width: 991px) {
+  .template-container {
+    width: 100%;
+    margin: 3px auto;
+    // 隐藏每个一级分类的title名称
+    .template-title {
+      display: none;
+    }
+
+    .card-item {
+      width: 50%;
+      display: inline-block;
+      padding: 8px;
+    }
+  }
+  .ant-card-meta-title {
+    white-space: wrap!important;
+    font-size: 10px!important;
+    text-align: center;
+  }
+  .ant-tabs-nav {
+    margin-top: 0!important;
+    margin-bottom: 4px!important;
+    // box-shadow: 0 0 1px 1px #ccc;
+  }
+}
+

@@ -21,7 +21,7 @@ function MyHeader(props) {
               return (
                 <li key={item.key} onClick={toggle}>
                   <Link
-                    to={item.title}
+                    to={item.key}
                     key={item.key}
                   >
                     {item.title}
