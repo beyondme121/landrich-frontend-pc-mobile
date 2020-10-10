@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import {
-  Link
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import menuConfig from '../../config/menu-config'
 import './header.less'
 
@@ -11,9 +9,16 @@ function MyHeader(props) {
   const toggle = () => {
     setMenuStatus(menuStatus + 1)
   }
+
+  const handleGoHome = () => {
+    // setMenuStatus(menuStatus + 1)
+    setMenuStatus(1)
+    props.history.push('/')
+  }
+
   return (
     <header>
-      <div className="logo">NMEFC FCST</div>
+      <div className="logo" onClick={handleGoHome}>NMEFC FCST</div>
       <nav className={menuStatus === -1 ? 'init' : menuStatus % 2 === 0 ? 'open' : 'closed'}>
         <ul>
           {

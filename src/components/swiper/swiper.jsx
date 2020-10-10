@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Swiper from 'swiper';
 import 'swiper/css/swiper.min.css'
@@ -19,7 +19,7 @@ export default function SwiperWrapper(props) {
             <h2 className={count % 2 === 0 ? 'slider-even' : 'slider-odd'}>
               {item.title}
             </h2>
-            <img src={serverStaticPath + item.imgSrc} />
+            <img src={serverStaticPath + item.imgSrc} alt={item.title} />
           </Link>
         </div>
       )
@@ -27,7 +27,7 @@ export default function SwiperWrapper(props) {
   }
 
   useEffect(() => {
-    let swiper = new Swiper('.swiper-container', {
+    new Swiper('.swiper-container', {
       spaceBetween: 0,
       centeredSlides: true,
       speed: 2000,

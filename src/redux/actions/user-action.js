@@ -18,8 +18,7 @@ export const logout = () => {
 // 登录
 export const asyncLogin = ({ email, password }) => {
   return async (dispatch) => {
-    const { code, data, token } = await reqLogin({ email, password })
-    console.log('data:', data)
+    const { code, data } = await reqLogin({ email, password })
     if (code === 0) {
       localStorage.setItem('user', JSON.stringify(data))
       localStorage.setItem('token', data.token)

@@ -1,81 +1,86 @@
-.crew {
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  /* 主轴(列)居中*/
-  justify-content: center;
-  margin: 50px auto 0;
-
-  .title {
-    height: 60px;
-    line-height: 60px;
-    font-size: 34px;
-    font-weight: bold;
-    color: var(--text-color-darker);
-    position: relative;
-    margin: 0 auto 60px;
-
-    // 下面的红线
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -6px;
-      width: 80%;
-      height: 4px;
-      background-color: var(--primary-color);
-      margin: 0 auto;
-    }
-  }
-
-  .section-wrapper {
+@media(min-width: 992px) {
+  .crew {
+    width: 80%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: #fff;
-
-    .section-item {
-      box-sizing: border-box;
-      width: 33.33%;
-      height: 50vh;
-      padding: 20px 30px;
-      transition: 0.4s ease;
+    flex-direction: column;
+    /* 主轴(列)居中*/
+    justify-content: center;
+    margin: 30px auto 0;
+  
+    .title {
+      height: 60px;
+      line-height: 60px;
+      font-size: 34px;
+      font-weight: bold;
+      color: var(--text-color-darker);
       position: relative;
-
-      &:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.5);
+      margin: 0 auto 60px;
+  
+      // 下面的红线
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -8px;
+        width: 80%;
+        height: 4px;
+        background-color: var(--primary-color);
+        margin: 0 auto;
       }
+    }
+  
+    .section-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      background-color: #fff;
 
-      .crew-name {
-        display: block;
-        margin: 20px 0;
-        font-size: 20px;
-      }
-
-      .crew-job-title {
-        padding: 0;
-        font-weight: 600;
-        color: rgba(0, 0, 0, 0.7);
-      }
-
-      // 图片下的文字
-      .crew-job-desc {
-        color: rgba(0, 0, 0, 0.6);
-        font-weight: 600;
+      .section-item {
+        box-sizing: border-box;
+        width: 33.33%;
+        height: 50vh;
+        padding: 20px 30px;
+        transition: 0.4s ease;
+        position: relative;
+  
+        &:hover {
+          transform: translateY(-10px) scale(1.02);
+          box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.5);
+        }
+        // 姓名
+        .crew-name {
+          display: block;
+          margin: 20px 0;
+          font-size: 20px;
+        }
+        // 职位名称
+        .crew-job-title {
+          padding: 0;
+          font-weight: 500;
+          color: rgba(0, 0, 0, 0.7);
+          margin-bottom: 10px;
+        }
+  
+        // 职位描述
+        .crew-job-desc {
+          color: rgba(0, 0, 0, 0.6);
+          font-weight: 400;
+          margin-bottom: 10px;
+        }
       }
     }
   }
 }
 
 
-@media(max-width:992px) {
+
+@media(max-width:991px) {
   .crew {
     width: 100%;
-    // display: flex;
-    // flex-direction: column;
+    display: flex;
+    flex-direction: column;
     // /* 主轴(列)居中*/
     // justify-content: center;
     margin: 20px auto 0;
@@ -95,7 +100,7 @@
         position: absolute;
         left: 0;
         right: 0;
-        bottom: -10px;
+        bottom: -16px;
         width: 80%;
         height: 4px;
         background-color: var(--primary-color);
@@ -104,6 +109,10 @@
     }
 
     .section-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
       background-color: #fff;
 
       .section-item {
@@ -125,40 +134,22 @@
 
         .crew-base {
           display: flex;
-
           .crew-baseinfo {
-            padding-left: 30px;
+            margin: 16px 0 0 30px;
+            .crew-name {
+              font-size: 20px;
+            }
+            .crew-job-title {
+              margin-top: 10px;
+            }
           }
         }
-
+        // 职位描述
         .crew-job-desc {
           padding-top: 20px;
-        }
-
-        // img {
-        //   float: left;
-        // }
-
-        // .crew-baseinfo {
-        //   float: right;
-
-        //   .crew-name {
-        //     font-size: 20px;
-        //   }
-
-        //   .crew-job-title {
-        //     display: inline-block;
-        //     padding: 0;
-        //     font-weight: 600;
-        //     color: rgba(0, 0, 0, 0.7);
-        //   }
-        // }
-
-
-        // 图片下的文字
-        .crew-job-desc {
-          color: rgba(0, 0, 0, 0.6);
-          font-weight: 600;
+          color: rgba(0, 0, 0, 0.8);
+          font-weight: 400;
+          margin-bottom: 10px;
         }
       }
     }

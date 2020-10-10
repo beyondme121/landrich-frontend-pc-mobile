@@ -96,7 +96,7 @@ function PageTemplate(props) {
       await asyncReqMenuCards()
     }
     getMenus()
-  }, [menuCards])
+  }, [menuCards, asyncReqMenuCards])
 
   const handleTabChange = key => {
     setSelectTabKey(key)
@@ -114,9 +114,8 @@ function PageTemplate(props) {
         centered
         type="card"
         animated={true}
-        // size="large"
         tabBarGutter={10}
-        tabPosition="top" vh
+        tabPosition="top"
         activeKey={selectTabKey}
         onChange={handleTabChange}
         style={{ height: '100%' }}

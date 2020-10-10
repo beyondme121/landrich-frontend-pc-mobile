@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { serverStaticPath } from '../../config/config'
 import { supporter } from '../../config/welcome-config'
 import { asyncReqMenuCards } from '../../redux/actions/menu-action'
-import Header from '../../components/header/header'
 import Swiper from '../../components/swiper/swiper'
 import ImageSection from '../../components/image-section/section'
-import Footer from '../../components/footer/footer'
 import './home.less'
 
 function HomeIndex(props) {
@@ -40,7 +37,7 @@ function HomeIndex(props) {
       }
       fn()
     }
-  }, [])
+  }, [menuCards, asyncReqMenuCards])
 
   return (
     <div className="home-container">

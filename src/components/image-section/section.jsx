@@ -8,7 +8,6 @@ const Section = memo(function Section(props) {
     title,
     type,
     data,
-    // children 
   } = props
   const renderSection = useMemo(() => {
     let result = data && data.filter(item => item.homepage_type === type)
