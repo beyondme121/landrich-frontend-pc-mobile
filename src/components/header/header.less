@@ -1,19 +1,27 @@
 // PC端
 @media(min-width: 992px) {
   header {
+    // 固定定位，定位在顶部, 覆盖下面滚动的内容
+    position: fixed;
+    top: 0;
+    z-index: 100;
     height: 80px;
     width: 100%;
     padding: 0 10%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fff;
+    // background-color: #fff;
     box-shadow: 0 0 3px 3px #ccc;
+    background-color: #333a42;
 
     .logo {
       font-size: 32px;
       font-weight: 700;
-      color: var(--text-font-color);
+      // color: var(--text-font-color);
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
     }
 
     nav {
@@ -30,10 +38,11 @@
 
         li {
           a {
-            color: var(--text-color-darker);
+            // color: var(--text-color-darker);
+            color: #fff;
             padding: 0 40px;
             font-size: var(--font20);
-
+            font-weight: bold;
             // 鼠标悬停效果
             &:hover {
               // -webkit-transform: translateY(-3px);
@@ -46,6 +55,14 @@
               color: var(--primary-color);
             }
           }
+        }
+
+        .active {
+          -webkit-box-shadow: 0 0 6px #999;
+          box-shadow: 0 0 6px #999;
+          -webkit-transition: all .5s ease-out;
+          transition: all .5s ease-out;
+          color: var(--primary-color);
         }
       }
     }
@@ -83,7 +100,7 @@
     }
 
     to {
-      height: 36%;
+      height: 100%;
       padding-top: 0px;
       opacity: 1;
     }
@@ -91,7 +108,7 @@
 
   @keyframes slideUp {
     from {
-      height: 36%;
+      height: 100%;
       padding-top: 0px;
       opacity: 1;
     }
@@ -100,24 +117,28 @@
       height: 0;
       display: none;
       opacity: 0;
-      z-index: -1;
+      z-index: -100;
     }
   }
 
   header {
+    position: fixed;
+    top: 0;
+    z-index: 100;
     height: 80px;
     width: 100vw;
     padding: 0 5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fff;
     box-shadow: 0 0 3px 3px #ccc;
-
+    background-color: #333a42;
     .logo {
       font-size: 32px;
       font-weight: 700;
-      color: var(--text-font-color);
+      // color: var(--text-font-color);
+      color: #fff;
+      cursor: pointer;
     }
 
     .init {
@@ -127,7 +148,7 @@
     // 点击按钮 菜单打开后
     .open {
       width: 100vw;
-      background: rgba(0, 0, 0, 0.8);
+      // background: rgba(0, 0, 0, 0.8);
       position: absolute;
       top: 80px;
       left: 0;
@@ -135,6 +156,7 @@
       animation: slideDown 0.6s ease-out forwards;
 
       ul li {
+        background: rgba(0, 0, 0, 0.8);
         width: 100vw;
         border-bottom: 1px dotted rgba(255, 255, 255, .6);
         line-height: 46px;
@@ -159,10 +181,11 @@
       position: absolute;
       top: 80px;
       left: 0;
-      z-index: 100;
+      z-index: -100;
       animation: slideUp 0.6s ease-out forwards;
 
       ul li {
+        display: none;    // 修复占位问题导致的下层无法被点击
         width: 100vw;
         border-bottom: 1px dotted rgba(0, 0, 0, .3);
         line-height: 46px;
@@ -177,15 +200,22 @@
         }
       }
     }
-
+    // 使用iconfont
     .phoneIcon {
-      display: block;
-      background: url(../../assets/images/phoneIcon.jpg) no-repeat;
-      width: 31px;
-      height: 26px;
-      cursor: pointer;
-      background-size: 100% auto;
+      svg {
+        color: #fff;
+        font-size: 30px;
+      }
     }
+
+    // .phoneIcon {
+    //   display: block;
+    //   background: url(../../assets/images/phoneIcon.jpg) no-repeat;
+    //   width: 31px;
+    //   height: 26px;
+    //   cursor: pointer;
+    //   background-size: 100% auto;
+    // }
 
     .userinfo {
       display: none;

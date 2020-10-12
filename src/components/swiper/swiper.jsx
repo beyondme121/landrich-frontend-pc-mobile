@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Swiper from 'swiper';
 import 'swiper/css/swiper.min.css'
-
-import './index.less'
+import './swiper.less'
 import { sliders } from '../../config/welcome-config'
 import { serverStaticPath } from '../../config/config'
 
 
 export default function SwiperWrapper(props) {
   const [count, setCount] = useState(0)
+
   // 生成轮播图
   const getSliderFromServer = () => {
     return sliders.map((item, index) => {
@@ -27,6 +27,7 @@ export default function SwiperWrapper(props) {
   }
 
   useEffect(() => {
+
     new Swiper('.swiper-container', {
       spaceBetween: 0,
       centeredSlides: true,
@@ -56,6 +57,7 @@ export default function SwiperWrapper(props) {
         }
       }
     });
+
   }, [])
 
   return (

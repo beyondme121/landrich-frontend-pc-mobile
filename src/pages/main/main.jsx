@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Home from '../home/home'
@@ -9,9 +9,19 @@ import ImageWrapper from '../../components/image-detail/image-detail'
 import './main.less'
 
 function Main(props) {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    })
+  })
+
   if (!props.user.isLogin) {
     return <Redirect to='/login' />
   }
+
   return (
     <div className="container">
       <Header />

@@ -39,6 +39,8 @@ function HomeIndex(props) {
     }
   }, [menuCards, asyncReqMenuCards])
 
+
+
   return (
     <div className="home-container">
       <Swiper />
