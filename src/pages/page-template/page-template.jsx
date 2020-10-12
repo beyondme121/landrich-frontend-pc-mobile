@@ -100,6 +100,11 @@ function PageTemplate(props) {
 
   const handleTabChange = key => {
     setSelectTabKey(key)
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    })
   }
 
   // 处理菜单子项的选中项
