@@ -37,7 +37,13 @@ export default function SwiperWrapper(props) {
         disableOnInteraction: false,
       },
       loop: true,
-      effect: 'coverflow',
+      effect: 'overflow',
+      // cubeEffect: {
+      //   slideShadows: true,
+      //   shadow: true,
+      //   shadowOffset: 100,
+      //   shadowScale: 0.6
+      // },
       slidesPerView: 1,
       pagination: {
         el: '.swiper-pagination',
@@ -57,7 +63,6 @@ export default function SwiperWrapper(props) {
         }
       }
     });
-
   }, [])
 
   return (

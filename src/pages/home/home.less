@@ -1,4 +1,12 @@
 @media(min-width: 992px) {
+  .welcome-info {
+    font-size: 30px;
+    color: var(--text-color-lightest);
+    padding: 30px 0 10px;
+    text-align: center;
+    user-select: none;
+  }
+
   .crew {
     width: 80%;
     display: flex;
@@ -12,7 +20,7 @@
       line-height: 60px;
       font-size: 34px;
       font-weight: bold;
-      color: var(--text-color-darker);
+      color: var(--text-color-lightest);
       position: relative;
       margin: 0 auto 60px;
   
@@ -35,7 +43,7 @@
       flex-wrap: wrap;
       justify-content: flex-start;
       align-items: flex-start;
-      background-color: #fff;
+      background-color: var(--primary-bgc);
 
       .section-item {
         box-sizing: border-box;
@@ -47,19 +55,20 @@
   
         &:hover {
           transform: translateY(-10px) scale(1.02);
-          box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 0px 18px rgba(255,255,255, 0.5);
         }
         // 姓名
         .crew-name {
           display: block;
           margin: 20px 0;
           font-size: 20px;
+          color: var(--text-color-lightest);
         }
         // 职位名称
         .crew-job-title {
           padding: 0;
           font-weight: 500;
-          color: rgba(0, 0, 0, 0.7);
+          color: var(--text-color-lightest);
           margin-bottom: 10px;
         }
   
@@ -68,6 +77,7 @@
           color: rgba(0, 0, 0, 0.6);
           font-weight: 400;
           margin-bottom: 10px;
+          color: var(--text-color-lightest);
         }
       }
     }
@@ -77,6 +87,9 @@
 
 // 手机端
 @media(max-width:991px) {
+  .welcome-info {
+    display: none;
+  }
   .crew {
     width: 100%;
     display: flex;
@@ -90,7 +103,7 @@
       line-height: 30px;
       font-size: 30px;
       font-weight: bold;
-      color: var(--text-color-darker);
+      color: var(--text-color-lightest);
       position: relative;
       margin: 0 auto 20px;
 
@@ -113,7 +126,7 @@
       flex-wrap: wrap;
       justify-content: flex-start;
       align-items: flex-start;
-      background-color: #fff;
+      background-color: var(--primary-bgc);
 
       .section-item {
         box-sizing: border-box;
@@ -138,16 +151,18 @@
             margin: 16px 0 0 30px;
             .crew-name {
               font-size: 20px;
+              color: var(--text-color-lightest);
             }
             .crew-job-title {
               margin-top: 20px;
+              color: var(--text-color-lightest);
             }
           }
         }
         // 职位描述
         .crew-job-desc {
           padding-top: 20px;
-          color: rgba(0, 0, 0, 0.8);
+          color: var(--text-color-lightest);
           font-weight: normal;
           margin-bottom: 10px;
           line-height: 1.6;

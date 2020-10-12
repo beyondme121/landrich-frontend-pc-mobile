@@ -43,6 +43,9 @@ function HomeIndex(props) {
 
   return (
     <div className="home-container">
+      <div className="welcome-info">
+        This UNOFFICIAL Web shows some FCST Figs. Related Figs are WELCOME! :)
+      </div>
       <Swiper />
       <ImageSection title="What's NEW" type="news" data={menuCards} />
       <ImageSection title="Shortcut" type="shortcut" data={menuCards} />
