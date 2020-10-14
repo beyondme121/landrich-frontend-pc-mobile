@@ -11,8 +11,15 @@ export const reqLogin = (user) => ajax(BASE + '/user/login', user, 'POST')
 export const reqLogout = () => ajax(BASE + '/user/logout')
 
 // 获取所有一级菜单下的所有cards明细数组
-export const reqMenuCards = () => ajax(BASE + '/menu-cards')
+export const reqImageCards = () => ajax(BASE + '/image-cards')
 
 // 查看明细
-export const reqMenuCardDetailById = (id) =>
-  ajax(BASE + '/menu-cards-detail', { id })
+export const reqImageCardDetailById = (id) =>
+  ajax(BASE + '/image-cards-detail', { id })
+
+// 菜单管理(一级菜单)
+// 1. 查询所有菜单
+export const reqMenuList = () => ajax(BASE + '/menu')
+// 2. 创建菜单
+export const reqCreateMenu = (menuInfo) =>
+  ajax(BASE + '/menu', menuInfo, 'POST')

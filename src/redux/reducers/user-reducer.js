@@ -11,18 +11,19 @@ let initUser = {
 }
 
 function userReducer(state = initUser, action) {
-  let { type, data } = action
+  let { type, payload } = action
   switch (type) {
     case SAVE_USER:
       return {
-        user: data.data,
-        token: data.token,
+        user: payload.user,
+        token: payload.token,
         isLogin: true,
       }
     case LOGOUT:
       return {
         user: {},
         token: '',
+        isLogin: false,
       }
     default:
       return state

@@ -1,14 +1,15 @@
 @media(min-width: 992px) {
+  
   .template-container {
     width: 80%;
-    margin: 10px auto;
+    margin: 0 auto;
     position: relative;
     .template-title {
       position: absolute;
       top: 0;
       left: 0;
-      font-size: 26px;
-      margin: 10px 0;
+      font-size: 30px;
+      margin-top: 14px;
       color: var(--text-color-lightest);
     }
     
@@ -17,12 +18,21 @@
       display: inline-block;
       padding: 8px;
     }
+
+    // 为了去掉tab的下划线
+    .ant-tabs-top > .ant-tabs-nav::before, .ant-tabs-bottom > .ant-tabs-nav::before, .ant-tabs-top > div > .ant-tabs-nav::before, .ant-tabs-bottom > div > .ant-tabs-nav::before {
+      position: absolute;
+      right: 0;
+      left: 0;
+      border-bottom: 0;
+      content: '';
+    }
   }
   // Tab标签的设置 标签tab的设置
   .ant-tabs-nav-wrap {
-    margin: 10px;
+    margin: 16px 0;
+    justify-content: flex-end!important;
   }
-
 
   .ant-card-meta-title {
     white-space: nowrap;
@@ -32,6 +42,12 @@
 
   .ant-tabs-tab {
     user-select: none;
+    background-color: #333a42!important;
+    border: 0!important;
+    font-size: 18px!important;
+  }
+  .ant-tabs-nav {
+    margin-bottom: 4px!important;
   }
 
 }
@@ -50,11 +66,29 @@
       display: inline-block;
       padding: 8px;
     }
+    // 为了去掉tab的下划线
+    .ant-tabs-top > .ant-tabs-nav::before, .ant-tabs-bottom > .ant-tabs-nav::before, .ant-tabs-top > div > .ant-tabs-nav::before, .ant-tabs-bottom > div > .ant-tabs-nav::before {
+      position: absolute;
+      right: 0;
+      left: 0;
+      border-bottom: 0;
+      content: '';
+    }
+  }
+
+  .ant-tabs-nav-wrap {
+    margin: 4px 0;
+    justify-content: flex-start!important;
   }
   .ant-card-meta-title {
     white-space: wrap!important;
     font-size: 10px!important;
     text-align: center;
+  }
+  .ant-tabs-tab {
+    user-select: none;
+    background-color: #333a42!important;
+    border: 0!important;
   }
   .ant-tabs-nav {
     margin-top: 0!important;
@@ -62,11 +96,14 @@
     width: 100%;   // 加上会滚动隐藏的tab
     position: fixed!important;
     z-index: 90!important;
-    background-color: #fff;
-    box-shadow: 0 0 3px 3px #ccc;
+    background-color: #333a42;
+    box-shadow: 0 0 3px 1px #ccc;
   }
   .ant-tabs-content-holder {
     margin-top: 40px!important;
+  }
+  .ant-tabs-tabpane {
+    margin-top: 10px;
   }
 }
 

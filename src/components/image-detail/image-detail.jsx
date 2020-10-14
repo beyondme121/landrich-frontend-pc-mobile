@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { serverStaticPath } from '../../config/config'
 import './image-detail.less'
-import { reqMenuCardDetailById } from '../../api/index'
+import { reqImageCardDetailById } from '../../api/index'
 
 function ImageWrapper(props) {
 
@@ -10,7 +10,7 @@ function ImageWrapper(props) {
 
   useEffect(() => {
     const reqDetail = async () => {
-      let r = await reqMenuCardDetailById(id)
+      let r = await reqImageCardDetailById(id)
       if (r.code === 0) {
         setDetail(r.data)
       }

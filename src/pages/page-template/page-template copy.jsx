@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Card, Tabs } from 'antd'
 import { Link, useParams } from 'react-router-dom'
 import { serverStaticPath } from '../../config/config'
+import menu from '../../config/menu-config'
 import './page-template.less'
 import { asyncReqImageCards } from '../../redux/actions/menu-action'
 
@@ -10,20 +11,20 @@ const { TabPane } = Tabs;
 const { Meta } = Card;
 
 function PageTemplate(props) {
-  const { asyncReqImageCards, imageCards, menuListByChildrenAllInfo } = props
+  const { asyncReqImageCards, menuCards } = props
   const { moduleName } = useParams()
   // 选项卡被选中的key
   const [selectTabKey, setSelectTabKey] = useState('all')
 
   // 某个菜单下的所有数据, 根据路由的名称筛选cards中的某个类别的数据集
   const cards = useMemo(() => {
-    return imageCards && imageCards.filter(item => item.class_type === moduleName)
-  }, [moduleName, imageCards])
+    return menuCards.menu_cards && menuCards.menu_cards.filter(item => item.class_type === moduleName)
+  }, [moduleName, menuCards.menu_cards])  // menuCards
 
   // 某个菜单的数据对象, 为了取一级菜单分类中的标题
   const menuObj = useMemo(() => {
-    return menuListByChildrenAllInfo.filter(item => item.MenuPath.indexOf(moduleName) !== -1)[0]
-  }, [menuListByChildrenAllInfo, moduleName])
+    return menu.filter(item => item.key.indexOf(moduleName) !== -1)[0]
+  }, [moduleName])
 
   // 生成某个一级分类的子标签的所有card DOM标签数组
   const paneData = useMemo(() => {
@@ -88,14 +89,14 @@ function PageTemplate(props) {
   // 加载菜单详细数据项目
   useEffect(() => {
     const getMenus = async () => {
-      if (imageCards && imageCards.length > 0) {
+      if (menuCards.menu_cards && menuCards.menu_cards.length > 0) {
         return
       }
       // 重新请求并将数据设置到store上
       await asyncReqImageCards()
     }
     getMenus()
-  }, [imageCards, asyncReqImageCards])
+  }, [menuCards, asyncReqImageCards])
 
   const handleTabChange = key => {
     setSelectTabKey(key)
@@ -113,18 +114,20 @@ function PageTemplate(props) {
 
   return (
     <div className="template-container">
-      <h3 className="template-title">{menuObj && menuObj.MenuDesc}</h3>
+      <h3 className="template-title">{menuObj.desc}</h3>
       <Tabs
         centered
         type="card"
         animated={true}
-        tabBarGutter={6}
+        tabBarGutter={10}
         tabPosition="top"
         activeKey={selectTabKey}
         onChange={handleTabChange}
         style={{ height: '100%' }}
         tabBarStyle={{
-          color: '#fff',
+          borderBottom: 0,
+          textAlign: 'right',     // tab页签 align在右
+          color: '#111',
           fontWeight: 'bold',
         }}
       >
@@ -136,8 +139,7 @@ function PageTemplate(props) {
 
 export default connect(
   state => ({
-    imageCards: state.imageCards,
-    menuListByChildrenAllInfo: state.menuListByChildrenAllInfo
+    menuCards: state.menu
   }),
   { asyncReqImageCards }
 )(PageTemplate);

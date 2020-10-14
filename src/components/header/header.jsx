@@ -1,17 +1,19 @@
-import React, { useState, memo } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { useState, memo, useEffect, useMemo } from 'react'
+import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createFromIconfontCN } from '@ant-design/icons';
-import { Link } from 'react-router-dom'
-import menuConfig from '../../config/menu-config'
+import { asyncReqMenuList } from '../../redux/actions/menu-action'
+import { iconfontURL } from '../../config/config'
+import HeaderMenu from './header-menu'
 import './header.less'
 
-
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1914917_oqq5lu3wd0e.js',
+  scriptUrl: iconfontURL
 });
 
+
 const MyHeader = memo(function MyHeader(props) {
+  const { asyncReqMenuList, menuListByChildrenAllInfo } = props
   const [menuStatus, setMenuStatus] = useState(-1)
   const [menuIndex, setMenuIndex] = useState(null)
 
@@ -25,44 +27,66 @@ const MyHeader = memo(function MyHeader(props) {
     props.history.push('/')
   }
 
+  // 请求菜单数据
+  useEffect(() => {
+    let reqMenuList = async () => {
+      await asyncReqMenuList()
+    }
+    if (menuListByChildrenAllInfo.length > 0) {
+      return
+    }
+    reqMenuList()
+  }, [menuListByChildrenAllInfo, asyncReqMenuList])
+
+  // 前端界面展示内容 菜单类型Type是client
+  let menuList = useMemo(() => {
+    return menuListByChildrenAllInfo.filter(item => item.Type === 'client')
+  }, [menuListByChildrenAllInfo])
+
   return (
     <header>
       <div className="logo" onClick={handleGoHome}>NMEFC FCST</div>
-      <nav className={menuStatus === -1 ? 'init' : menuStatus % 2 === 0 ? 'open' : 'closed'}>
-        <ul>
-          {
-            menuConfig.map((item, index) => {
-              if (item.key.startsWith('http')) {
-                return (
-                  <li key={item.key} onClick={() => toggle(index)} >
-                    <a
-                      href={item.key}
-                      key={item.key}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={menuIndex === index ? 'active' : ''}
-                    >
-                      {item.title}
-                    </a>
-                  </li>
-                )
-              } else {
-                return (
-                  <li key={item.key} onClick={() => toggle(index)} >
-                    <Link
-                      to={item.key}
-                      key={item.key}
-                      className={menuIndex === index ? 'active' : ''}
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                )
-              }
-            })
-          }
-        </ul>
-      </nav>
+      <div className="pc-menu">
+        <HeaderMenu />
+      </div>
+      <div className="mobile-menu">
+        {/* 只解析第一层菜单 */}
+        <nav className={menuStatus === -1 ? 'init' : menuStatus % 2 === 0 ? 'open' : 'closed'}>
+          <ul>
+            {
+              menuList && menuList.map((item, index) => {
+                if (item.MenuPath.startsWith('http')) {
+                  return (
+                    <li key={item.MenuId} onClick={() => toggle(index)} >
+                      <a
+                        href={item.MenuPath}
+                        key={item.MenuId}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={menuIndex === index ? 'active' : ''}
+                      >
+                        {item.MenuNameEN}
+                      </a>
+                    </li>
+                  )
+                } else {
+                  return (
+                    <li key={item.MenuId} onClick={() => toggle(index)} >
+                      <Link
+                        to={item.MenuPath}
+                        key={item.MenuId}
+                        className={menuIndex === index ? 'active' : ''}
+                      >
+                        {item.MenuNameEN}
+                      </Link>
+                    </li>
+                  )
+                }
+              })
+            }
+          </ul>
+        </nav>
+      </div>
       {
         props.user.isLogin ? null : <div className="userinfo">
           <span className="userinfo-item" onClick={() => props.history.push('/login')}>登录</span>
@@ -77,7 +101,10 @@ const MyHeader = memo(function MyHeader(props) {
 
 export default withRouter(connect(
   state => ({
-    user: state.user
+    user: state.user,
+    menuList: state.menuList,
+    menuListByChildren: state.menuListByChildren,
+    menuListByChildrenAllInfo: state.menuListByChildrenAllInfo
   }),
-  {}
+  { asyncReqMenuList }
 )(MyHeader))

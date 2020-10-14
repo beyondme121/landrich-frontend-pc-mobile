@@ -4,5 +4,8 @@ import menu from './menu-reducer'
 
 export default combineReducers({
   user,
-  menu,
+  imageCards: menu.menuCardsReducer, //
+  menuList: menu.menuReducer, //  菜单数据
+  menuListByChildren: menu.menuListByChildren,
+  menuListByChildrenAllInfo: menu.menuListByChildrenAllInfo,
 })

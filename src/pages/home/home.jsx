@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { serverStaticPath } from '../../config/config'
 import { supporter } from '../../config/welcome-config'
-import { asyncReqMenuCards } from '../../redux/actions/menu-action'
+import { asyncReqImageCards } from '../../redux/actions/menu-action'
 import Swiper from '../../components/swiper/swiper'
 import ImageSection from '../../components/image-section/section'
+import { asyncReqMenuList } from '../../redux/actions/menu-action'
 import './home.less'
 
 function HomeIndex(props) {
-  const { asyncReqMenuCards, menuCards } = props
+  const { asyncReqImageCards, imageCards, asyncReqMenuList } = props
 
   const getSupportCrew = () => {
     let res = supporter.reduce((pre, item, index) => {
@@ -31,15 +32,21 @@ function HomeIndex(props) {
 
   useEffect(() => {
     // 如果没有请求明细数据, 拉取数据到redux中
-    if (!menuCards) {
+    if (imageCards.length === 0) {
       const fn = async () => {
-        await asyncReqMenuCards()
+        await asyncReqImageCards()
       }
       fn()
     }
-  }, [menuCards, asyncReqMenuCards])
+  }, [imageCards, asyncReqImageCards])
 
-
+  // 加载菜单数据
+  useEffect(() => {
+    let fn = async () => {
+      await asyncReqMenuList()
+    }
+    fn()
+  })
 
   return (
     <div className="home-container">
@@ -47,8 +54,8 @@ function HomeIndex(props) {
         This UNOFFICIAL Web shows some FCST Figs. Related Figs are WELCOME! :)
       </div>
       <Swiper />
-      <ImageSection title="What's NEW" type="news" data={menuCards} />
-      <ImageSection title="Shortcut" type="shortcut" data={menuCards} />
+      <ImageSection title="What's NEW" type="news" data={imageCards} />
+      <ImageSection title="Shortcut" type="shortcut" data={imageCards} />
       <div className="crew">
         <h2 className="title">Support Crew</h2>
         <section className="section-wrapper">
@@ -60,7 +67,7 @@ function HomeIndex(props) {
 }
 export default connect(
   state => ({
-    menuCards: state.menu.menu_cards
+    imageCards: state.imageCards
   }),
-  { asyncReqMenuCards }
+  { asyncReqImageCards, asyncReqMenuList }
 )(HomeIndex)

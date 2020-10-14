@@ -1,5 +1,5 @@
 @media(min-width:992px) {
-  .login {
+  .register {
     // 垂直居中(无固定高度的)
     position: absolute;
     top: 50%;
@@ -15,10 +15,10 @@
     justify-content: center;
     height: 70vh;
   
-    .login-left {
+    .register-left {
       width: 50%;
       height: 100%;
-      padding: 60px 0 30px 30px;
+      padding: 40px 0 30px 30px;
       background: #47566A url(../../assets/images/login-bgimg.png) no-repeat;
   
       h1 {
@@ -35,19 +35,19 @@
       }
     }
   
-    .login-right {
+    .register-right {
       width: 50%;
       height: 100%;
-      padding: 60px 30px 30px 30px;
+      padding: 40px 30px 30px 30px;
   
       .form-title {
-        padding-bottom: 2rem;
+        padding-bottom: 24px;
         display: flex;
         justify-content: space-between;
         align-items: center;
   
         strong {
-          font-size: 1.8rem;
+          font-size: 26px;
         }
   
         a {
@@ -75,67 +75,66 @@
 
 
 @media(max-width:991px) {
-  .login {
+  .register {
     width: 100%;
     margin: 2px auto;
     border-radius: 5px;
     border: 1px solid var(--text-color-lightest);
     box-shadow: 0 0 1px 1px rgba(192, 192, 192, .6);
-  }
+    .register-left {
+      display: block;
+      width: 100%;
+      padding: 20px;
+      background: #47566A url(../../assets/images/login-bgimg.png) no-repeat;
 
-  .login-left {
-    display: block;
-    width: 100%;
-    padding: 20px;
-    background: #47566A url(../../assets/images/login-bgimg.png) no-repeat;
-
-    h1 {
-      font-size: 30px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .info {
-      color: #bbb;
-      font-size: 18px;
-      margin-top: 10px;
-      line-height: 2;
-    }
-  }
-
-  .login-right {
-    width: 100%;
-    height: 100%;
-    padding: 0 10px;
-
-    .form-title {
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      strong {
-        font-size: 28px;
+      h1 {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 10px;
       }
 
-      a {
-        color: #47566A;
-
+      .info {
+        color: #bbb;
+        font-size: 18px;
+        margin-top: 10px;
+        line-height: 2;
+      }
+    }
+    .register-right {
+      width: 100%;
+      height: 100%;
+      padding: 0 10px;
+  
+      .form-title {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+  
+        strong {
+          font-size: 28px;
+        }
+  
+        a {
+          color: #47566A;
+  
+          &:hover {
+            color: #f01;
+          }
+        }
+      }
+  
+      .submitBtn {
+        width: 100%;
+        background-color: #ccc;
+        outline: none;
+        border: none;
+  
         &:hover {
-          color: #f01;
+          background-color: #FE7300;
         }
       }
     }
-
-    .submitBtn {
-      width: 100%;
-      background-color: #ccc;
-      outline: none;
-      border: none;
-
-      &:hover {
-        background-color: #FE7300;
-      }
-    }
   }
+  
 }
