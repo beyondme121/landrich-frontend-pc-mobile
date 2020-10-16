@@ -6,8 +6,8 @@ import { Layout, Breadcrumb } from 'antd';
 import Header from '../header/header'
 import LeftNav from '../left-nav/left-nav'
 import MenuIndex from '../menu/menu'
-
-// import { asyncReqMenuList } from '../../../redux/actions/menu-action'
+import TabIndex from '../tab/tab'
+import ImageIndex from '../image-card'
 import './admin.less'
 
 const { Content } = Layout;
@@ -30,7 +30,7 @@ const Admin = function Admin(props) {
       <Header onCollapsed={onCollapsed} myCollapsed={collapsed} />
       <Layout>
         <LeftNav myCollapsed={collapsed} />
-        <Layout style={{ padding: '0', position: "relative" }}>
+        <Layout style={{ padding: '0', position: "relative", backgroundColor: '#fff' }}>
           <Breadcrumb className="admin-bread-nav">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
@@ -39,6 +39,8 @@ const Admin = function Admin(props) {
           <Content className="admin-content">
             <Switch>
               <Route path='/admin/menu' component={MenuIndex} />
+              <Route path='/admin/tab' component={TabIndex} />
+              <Route path='/admin/image' component={ImageIndex} />
               <Redirect to='/admin/menu' />
             </Switch>
           </Content>

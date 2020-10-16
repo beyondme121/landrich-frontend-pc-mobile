@@ -1,4 +1,4 @@
-import { reqImageCards, reqMenuList } from '../../api'
+import { reqGetImageCards, reqGetMenuList } from '../../api'
 import {
   SAVE_MENU_CARDS,
   SAVE_MENU_LIST,
@@ -51,7 +51,7 @@ const save_menu_children_for_tree_select = (data) => {
 // 获取一级菜单列表数据
 export const asyncReqMenuList = () => {
   return async (dispatch) => {
-    let { code, data } = await reqMenuList()
+    let { code, data } = await reqGetMenuList()
     if (code === 0) {
       // 将数据库中父子结构转换成children结构
       let childrenDataForTree = toTree(data, {
@@ -73,7 +73,7 @@ export const asyncReqMenuList = () => {
 // 3. 请求图片
 export const asyncReqImageCards = () => {
   return async (dispatch) => {
-    const { code, data } = await reqImageCards()
+    const { code, data } = await reqGetImageCards()
     if (code === 0) {
       dispatch(save_cards(data))
     } else {

@@ -74,11 +74,13 @@ const HeaderMenu = memo(function HeaderMenu(props) {
   }, [menuListByChildrenAllInfo, hasAuth])
 
   return (
-    <Menu
-      mode="horizontal"
-    >
-      {menuTree}
-    </Menu>
+    <div className="header-menu">
+      <Menu
+        mode="horizontal"
+      >
+        {menuTree}
+      </Menu>
+    </div>
   )
 })
 

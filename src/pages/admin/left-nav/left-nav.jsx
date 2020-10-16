@@ -1,16 +1,20 @@
 import React, { useMemo, useEffect, useCallback } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { createFromIconfontCN } from '@ant-design/icons';
+import {
+  // createFromIconfontCN,
+  FileTextOutlined
+} from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { connect } from 'react-redux'
 import { asyncReqMenuList } from '../../../redux/actions/menu-action'
-import { iconfontURL } from '../../../config/config'
+// import { iconfontURL } from '../../../config/config'
 import './left-nav.less'
 const { Sider } = Layout;
 const { SubMenu, Item } = Menu;
-const IconFont = createFromIconfontCN({
-  scriptUrl: iconfontURL,
-});
+
+// const IconFont = createFromIconfontCN({
+//   scriptUrl: iconfontURL,
+// });
 
 const LeftNav = function LeftNav(props) {
   // redux
@@ -50,7 +54,8 @@ const LeftNav = function LeftNav(props) {
             pre.push(
               <Item key={item.MenuPath}>
                 <Link to={item.MenuPath}>
-                  <IconFont type="icon-menu" className="menuIcon" />
+                  {/* <IconFont type="icon-menu" className="menuIcon" /> */}
+                  <FileTextOutlined />
                   <span>{item.MenuNameCN}</span>
                 </Link>
               </Item>
@@ -61,7 +66,8 @@ const LeftNav = function LeftNav(props) {
                 key={item.MenuPath}
                 title={
                   <>
-                    <IconFont type="icon-menu" className="menuIcon" />
+                    {/* <IconFont type="icon-menu" className="menuIcon" /> */}
+                    <FileTextOutlined />
                     <span>{item.MenuNameCN}</span>
                   </>
                 }
@@ -91,8 +97,9 @@ const LeftNav = function LeftNav(props) {
           menuTree ?
             <Menu
               mode="inline"   // vertical, inline
+              theme="dark"
               style={{ height: '100%', borderRight: 0 }}
-              defaultOpenKeys={['/']}
+              defaultOpenKeys={['/admin']}
               inlineIndent={10}
             >
               {menuTree}

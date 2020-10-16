@@ -9,6 +9,10 @@ const columns = [
     dataIndex: 'MenuNameEN',
   },
   {
+    title: '菜单名称',
+    dataIndex: 'MenuNameCN',
+  },
+  {
     title: '菜单路径',
     dataIndex: 'MenuPath',
   },
@@ -38,7 +42,13 @@ function MenuList(props) {
     <Card
       title={title}
     >
-      <Table bordered dataSource={menuList} columns={columns} rowKey="MenuId" />
+      <Table
+        bordered
+        dataSource={menuList}
+        columns={columns}
+        rowKey="MenuId"
+        size="middle"
+      />
     </Card>
   )
 }

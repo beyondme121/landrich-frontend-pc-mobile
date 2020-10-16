@@ -3,6 +3,7 @@ import {
   SAVE_MENU_CARDS,
   SAVE_MENU_LIST_CHILDREN_FOR_TREE_SELECT,
   SAVE_MENU_LIST_CHILDREN_FOR_ALL_INFO,
+  CLEAR_REDUX_STATE,
 } from '../action-types'
 
 let initMenuCards = []
@@ -13,6 +14,8 @@ function menuReducer(state = [], action) {
   switch (type) {
     case SAVE_MENU_LIST:
       return [...data]
+    case CLEAR_REDUX_STATE:
+      return []
     default:
       return state
   }
@@ -24,6 +27,8 @@ const menuListByChildren = (state = [], action) => {
   switch (type) {
     case SAVE_MENU_LIST_CHILDREN_FOR_TREE_SELECT:
       return [...data]
+    case CLEAR_REDUX_STATE:
+      return []
     default:
       return state
   }
@@ -34,6 +39,8 @@ const menuListByChildrenAllInfo = (state = [], action) => {
   switch (type) {
     case SAVE_MENU_LIST_CHILDREN_FOR_ALL_INFO:
       return [...data]
+    case CLEAR_REDUX_STATE:
+      return []
     default:
       return state
   }
@@ -45,6 +52,8 @@ function menuCardsReducer(state = initMenuCards, action) {
   switch (type) {
     case SAVE_MENU_CARDS:
       return [...data]
+    case CLEAR_REDUX_STATE:
+      return []
     default:
       return state
   }

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Select, message } from 'antd'
+import { Dropdown, Menu } from 'antd'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { logout } from '../../../redux/actions/user-action'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import './header.less'
-const { Option } = Select
+const { Item } = Menu
 
 function MyHeader(props) {
   const {
@@ -16,12 +17,16 @@ function MyHeader(props) {
   // 将传入组件内部的参数转换为内部的状态
   const [innerStatus, setInnerStatus] = useState(myCollapsed)
 
-  const handleLogout = value => {
-    if (value === '注销') {
-      logout()
-      message.info('注销')
-    }
-  }
+  const dropDownMenu = (
+    <Menu>
+      <Item onClick={() => { props.history.replace('/') }}>
+        <span>前台网站</span>
+      </Item>
+      <Item onClick={logout}>
+        <span>注销</span>
+      </Item>
+    </Menu>
+  )
 
   const changeStatus = () => {
     setInnerStatus(!myCollapsed)
@@ -37,11 +42,11 @@ function MyHeader(props) {
         </div>
       </div>
       <div className="admin-header-right">
-        <Select onChange={val => handleLogout(val)} style={{ width: 120 }} bordered={false}>
-          <Option value={user.username}>{user.name}</Option>
-          <Option value='注销'>注销</Option>
-          <Option value='个人设置'>个人设置</Option>
-        </Select>
+        <Dropdown overlay={dropDownMenu}>
+          <span className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+            {user.username}
+          </span>
+        </Dropdown>
       </div>
     </div>
   )
@@ -54,4 +59,4 @@ export default connect(
     user: state.user.user
   }),
   { logout }
-)(MyHeader)
+)(withRouter(MyHeader))
