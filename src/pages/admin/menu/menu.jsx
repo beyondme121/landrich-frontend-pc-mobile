@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import MenuForm from './menuForm'
 import MenuList from './menuList'
+import './menu.less'
 
 function MenuIndex(props) {
   return (

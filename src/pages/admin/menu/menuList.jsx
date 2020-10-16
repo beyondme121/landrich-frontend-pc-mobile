@@ -39,17 +39,22 @@ function MenuList(props) {
   )
 
   return (
-    <Card
-      title={title}
-    >
-      <Table
-        bordered
-        dataSource={menuList}
-        columns={columns}
-        rowKey="MenuId"
-        size="middle"
-      />
-    </Card>
+    <div className="menu-list">
+      <Card
+        title={title}
+      >
+        <Table
+          bordered
+          dataSource={menuList}
+          columns={columns}
+          rowKey="MenuId"
+          size="middle"
+          pagination={{ pageSize: 50 }}
+          scroll={{ x: '80%', y: 450 }}
+        />
+      </Card>
+    </div>
+
   )
 }
 

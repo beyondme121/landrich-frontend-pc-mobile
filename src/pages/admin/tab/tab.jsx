@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import TabForm from './tab-form'
 import TabList from './tab-list'
+import './tab.less'
 
 function Tabs() {
   return (

@@ -63,17 +63,21 @@ function TabList(props) {
   }, [MenuInfoMapping]);
 
   return (
-    <Card
-      title={title}
-    >
-      <Table
-        bordered
-        dataSource={tabList}
-        columns={columns}
-        rowKey="TabId"
-        size="middle"
-      />
-    </Card>
+    <div className="tab-list">
+      <Card
+        title={title}
+      >
+        <Table
+          bordered
+          dataSource={tabList}
+          columns={columns}
+          rowKey="TabId"
+          size="middle"
+          pagination={{ pageSize: 1000 }}
+          scroll={{ x: '80%', y: 450 }}
+        />
+      </Card>
+    </div>
   )
 }
 

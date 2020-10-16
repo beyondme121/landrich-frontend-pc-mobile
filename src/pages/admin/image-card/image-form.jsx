@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Form, Input, Button, Select, message } from 'antd';
 import { asyncReqImageCards } from '../../../redux/actions/menu-action'
 import { reqCreateImageCard, reqGetTabMenuMapping } from '../../../api'
+import './image-form.less'
 
 const layout = {
   labelCol: { span: 4 },
@@ -26,7 +27,6 @@ function ImageForm(props) {
   let [menuSelect, setMenuSelect] = useState('')
   let [tabMenuMapping, setTabMenuMapping] = useState([])
 
-
   const onFinish = async values => {
     let res = await reqCreateImageCard(values)
     if (res.code === 0) {
@@ -35,6 +35,7 @@ function ImageForm(props) {
       props.history.push('/admin/image/list')
     }
   };
+
   const onFinishFailed = errorInfo => {
     message.error(errorInfo)
   };
@@ -71,6 +72,7 @@ function ImageForm(props) {
     ))
   }, [MenuListObj])
 
+  // 生成一级菜单下Tab数据
   const tabData = useMemo(() => {
     return tabMenuMapping && tabMenuMapping.filter(item => item.MenuNameEN === menuSelect)
   }, [menuSelect, tabMenuMapping])
@@ -134,88 +136,90 @@ function ImageForm(props) {
   // --------------------- 原始代码 需要替换 end
 
   return (
-    <Form
-      {...layout}
-      name="image-card"
-      initialValues={{ Type: 'admin', AuthType: 'authorized' }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-    >
-      <div style={dividerLayout}>
-        内容主题配置
+    <div className="image-form-container" style={{ height: '400px' }}>
+      <Form
+        {...layout}
+        name="image-card"
+        initialValues={{ Type: 'admin', AuthType: 'authorized' }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+      >
+        <div style={dividerLayout}>
+          内容主体配置
       </div>
-      <Item
-        label="图片内容标题"
-        name="title"
-        rules={[{ required: true, message: '请输入内容名称' }]}
-      >
-        <Input />
-      </Item>
-      <Item
-        label="图片相对路径"
-        name="coverImg"
-        rules={[{ required: true, message: '请输入图片路径' }]}
-      >
-        <Input />
-      </Item>
-      <Item
-        label="一级分类"
-        name="class_type"
-        rules={[{ required: true, message: '请选择一级分类' }]}
-      >
-        <Select style={{ width: 200 }} onChange={onMenuClassTypeChange}>
-          {MenuListOptions}
-        </Select>
-      </Item>
-      <Item
-        label="二级分类"
-        name="type"
-        rules={[{ required: true, message: '请选择二级分类' }]}
-      >
-        <Select style={{ width: 200 }} >
-          {tabDataOptions}
-        </Select>
-      </Item>
-      <Item
-        label="首页分类"
-        name="homepage_type"
-      >
-        <Select style={{ width: 200 }}>
-          <Option value="news">news</Option>
-          <Option value="shortcut">shortcut</Option>
-        </Select>
-      </Item>
-      <div style={dividerLayout}>
-        内容详情配置
+        <Item
+          label="图片内容标题"
+          name="title"
+          rules={[{ required: true, message: '请输入内容名称' }]}
+        >
+          <Input />
+        </Item>
+        <Item
+          label="图片相对路径"
+          name="coverImg"
+          rules={[{ required: true, message: '请输入图片路径' }]}
+        >
+          <Input />
+        </Item>
+        <Item
+          label="一级分类"
+          name="class_type"
+          rules={[{ required: true, message: '请选择一级分类' }]}
+        >
+          <Select style={{ width: 200 }} onChange={onMenuClassTypeChange}>
+            {MenuListOptions}
+          </Select>
+        </Item>
+        <Item
+          label="二级分类"
+          name="type"
+          rules={[{ required: true, message: '请选择二级分类' }]}
+        >
+          <Select style={{ width: 200 }} >
+            {tabDataOptions}
+          </Select>
+        </Item>
+        <Item
+          label="首页分类"
+          name="homepage_type"
+        >
+          <Select style={{ width: 200 }}>
+            <Option value="news">news</Option>
+            <Option value="shortcut">shortcut</Option>
+          </Select>
+        </Item>
+        <div style={dividerLayout}>
+          内容详情配置
       </div>
-      <Item
-        label="详情内容标题"
-        name="detail-title"
-      >
-        <Input />
-      </Item>
-      <Item
-        label="内嵌图片路径"
-        name="imgURLS"
-      >
-        <TextArea
-          placeholder="
+        <Item
+          label="详情内容标题"
+          name="detail_title"
+        >
+          <Input />
+        </Item>
+        <Item
+          label="内嵌图片路径"
+          name="imgURLS"
+        >
+          <TextArea
+            placeholder="
             填写图片所在路径, 多张图片路径以英文逗号','进行分隔,例如:
             /images/atmos/Ph_6.png,/images/atmos/Ph_12.png,"
-          autoSize={{ minRows: 4 }}
-        />
-      </Item>
-      <Item
-        label="排序字段"
-        name="SortKey"
-        wrapperCol={{ span: 4 }}
-      >
-        <Input type="number" />
-      </Item>
-      <Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">提交</Button>
-      </Item>
-    </Form>
+            autoSize={{ minRows: 4 }}
+          />
+        </Item>
+        <Item
+          label="排序字段"
+          name="SortKey"
+          wrapperCol={{ span: 4 }}
+        >
+          <Input type="number" />
+        </Item>
+        <Item {...tailLayout}>
+          <Button type="primary" htmlType="submit">提交</Button>
+        </Item>
+      </Form>
+    </div>
   )
 }
 

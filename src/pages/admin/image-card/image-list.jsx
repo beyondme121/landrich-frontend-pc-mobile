@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { Table, Card, Space, Button, message } from 'antd'
 import { connect } from 'react-redux'
-import { reqGetImageCardDetailAll } from '../../../api'
+import { reqGetImageCardDetailAll, reqGetTabMenuMapping } from '../../../api'
+import './image-list.less'
 
 function ImageList(props) {
   const { menuListByChildrenAllInfo } = props
   const [imageCardDetailList, setImageCardDetailList] = useState([])
+  const [tabMenuMapping, setTabMenuMapping] = useState([])
+  const [selectMenuItem, setSelectMenuItem] = useState('')
 
+  // 1. 一级菜单数据整合
   const filterMenu = useMemo(() => {
     return menuListByChildrenAllInfo && menuListByChildrenAllInfo.reduce((pre, item) => {
       if (item.Type === 'client') {
@@ -18,6 +22,28 @@ function ImageList(props) {
       return pre
     }, [])
   }, [menuListByChildrenAllInfo])
+
+  console.log("tabMenuMapping:", tabMenuMapping)
+
+  // 2. tab数据整合
+  const filterTab = useMemo(() => {
+    return selectMenuItem && tabMenuMapping && tabMenuMapping.reduce((pre, item) => {
+      if (
+        selectMenuItem.class_type &&
+        selectMenuItem.class_type.indexOf(item.MenuNameEN.toLowerCase()) !== -1) {
+        pre.push({
+          text: item.TabNameEN,
+          value: item.TabNameEN,
+        })
+      }
+      return pre
+    }, [])
+  }, [selectMenuItem, tabMenuMapping])
+
+  // 3. 事件处理
+  const handleChange = (pagination, filters, sorter) => {
+    setSelectMenuItem(filters)
+  }
 
   const title = (
     <Space>
@@ -37,7 +63,7 @@ function ImageList(props) {
         width: 250,
       },
       {
-        title: '归属菜单',
+        title: '菜单',
         dataIndex: 'class_type',
         width: 80,
         filters: filterMenu,
@@ -45,9 +71,11 @@ function ImageList(props) {
         onFilter: (value, record) => record.class_type.indexOf(value) === 0,
       },
       {
-        title: 'Tab分类',
+        title: '选项',
         dataIndex: 'type',
-        width: 80
+        width: 80,
+        filters: filterTab,
+        onFilter: (value, record) => record.type.indexOf(value) === 0,
       },
       {
         title: '首页分类',
@@ -62,10 +90,12 @@ function ImageList(props) {
       {
         title: '明细图片路径集合',
         dataIndex: 'imgURLS',
+        ellipsis: true,
       },
     ]
-  }, [filterMenu]);
+  }, [filterMenu, filterTab]);
 
+  // 1. 请求明细数据
   useEffect(() => {
     let fn = async () => {
       let res = await reqGetImageCardDetailAll()
@@ -78,28 +108,36 @@ function ImageList(props) {
     fn()
   }, [])
 
-  // const MenuInfoMapping = useMemo(() => {
-  //   let obj = {}
-  //   menuList.map(item => {
-  //     obj[item.MenuId] = item['MenuNameEN']
-  //   })
-  //   return obj
-  // }, [menuList])
+  // 2. 创建Menu和tab的mapping
+  useEffect(() => {
+    let fn = async () => {
+      let res = await reqGetTabMenuMapping()
+      if (res.code === 0) {
+        setTabMenuMapping(res.data)
+      } else {
+        message.warning('获取数据异常')
+      }
+    }
+    fn()
+  }, [])
 
   return (
-    <Card
-      title={title}
-    >
-      <Table
-        bordered
-        dataSource={imageCardDetailList}
-        columns={columns}
-        rowKey="id"
-        size="middle"
-        pagination={{ pageSize: 50 }}
-        scroll={{ x: 1800, y: 600 }}     // 和column中的width一起使用才能指定列宽度和固定表头
-      />
-    </Card>
+    <div className="image-list">
+      <Card
+        title={title}
+      >
+        <Table
+          bordered
+          dataSource={imageCardDetailList}
+          columns={columns}
+          rowKey="id"
+          size="middle"
+          pagination={{ pageSize: 1000 }}
+          scroll={{ x: '80%', y: 450 }}     // 和column中的width一起使用才能指定列宽度和固定表头
+          onChange={handleChange}
+        />
+      </Card>
+    </div>
   )
 }
 
