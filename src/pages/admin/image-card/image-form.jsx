@@ -2,7 +2,11 @@ import React, { useMemo, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Form, Input, Button, Select, message } from 'antd';
 import { asyncReqImageCards } from '../../../redux/actions/menu-action'
-import { reqCreateImageCard, reqGetTabMenuMapping } from '../../../api'
+import {
+  reqCreateImageCard,
+  reqUpdateImageCardById,
+  reqGetTabMenuMapping
+} from '../../../api'
 import './image-form.less'
 
 const layout = {
@@ -27,13 +31,27 @@ function ImageForm(props) {
   let [menuSelect, setMenuSelect] = useState('')
   let [tabMenuMapping, setTabMenuMapping] = useState([])
 
+  let originFormData = props.location.state;
+
   const onFinish = async values => {
-    let res = await reqCreateImageCard(values)
-    if (res.code === 0) {
-      message.success(`内容${res.data.title}创建成功`)
-      await asyncReqImageCards()
-      props.history.push('/admin/image/list')
+    // 更新
+    if (originFormData && originFormData.id) {
+      let res = await reqUpdateImageCardById(originFormData.id, values)
+      if (res.code === 0) {
+        message.success(`内容${res.data.title}更新成功`)
+        await asyncReqImageCards()
+        props.history.push('/admin/image/list')
+      }
+    } else {
+      // 创建
+      let res = await reqCreateImageCard(values)
+      if (res.code === 0) {
+        message.success(`内容${res.data.title}创建成功`)
+        await asyncReqImageCards()
+        props.history.push('/admin/image/list')
+      }
     }
+
   };
 
   const onFinishFailed = errorInfo => {
@@ -140,7 +158,10 @@ function ImageForm(props) {
       <Form
         {...layout}
         name="image-card"
-        initialValues={{ Type: 'admin', AuthType: 'authorized' }}
+        initialValues={{
+          ...originFormData,
+          // class_type: originFormData && originFormData.class_type.toUpperCase()
+        }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
@@ -210,7 +231,7 @@ function ImageForm(props) {
         </Item>
         <Item
           label="排序字段"
-          name="SortKey"
+          name="sort_key"
           wrapperCol={{ span: 4 }}
         >
           <Input type="number" />

@@ -19,10 +19,14 @@ export const reqCreateMenu = (menu) => ajax(BASE + '/menu', menu, 'POST')
 export const reqCreateImageCard = (card) =>
   ajax(BASE + '/image-cards', card, 'POST')
 
-// 4. 获取所有一级菜单下的所有cards明细数组
+// 4. 根据id更新card信息
+export const reqUpdateImageCardById = (id, card) =>
+  ajax(BASE + '/image-cards', { id, card }, 'PUT')
+
+// 5. 获取所有一级菜单下的所有cards明细数组
 export const reqGetImageCards = () => ajax(BASE + '/image-cards')
 
-// 5. 查看明细
+// 6. 查看明细
 export const reqGetImageCardDetailById = (id) =>
   ajax(BASE + '/image-cards-detail', { id })
 export const reqGetImageCardDetailAll = () =>
@@ -32,9 +36,9 @@ export const reqDeleteImageCardById = (id) =>
   ajax(BASE + '/image-cards-by-id', { id }, 'delete')
 
 // ========================= 4. Tab管理(菜单下的Tab) =========================
-// 6. tab清单
+// 7. tab清单
 export const reqGetTabList = () => ajax(BASE + '/tab-list')
-// 7. 创建tab
+// 8. 创建tab
 export const reqCreateTab = (tab) => ajax(BASE + '/tab', tab, 'POST')
-// 8. tab与menu对应关系
+// 9. tab与menu对应关系
 export const reqGetTabMenuMapping = () => ajax(BASE + '/tab-menu-mapping')
