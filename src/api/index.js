@@ -28,6 +28,9 @@ export const reqGetImageCardDetailById = (id) =>
 export const reqGetImageCardDetailAll = () =>
   ajax(BASE + '/image-cards-detail-all')
 
+export const reqDeleteImageCardById = (id) =>
+  ajax(BASE + '/image-cards-by-id', { id }, 'delete')
+
 // ========================= 4. Tab管理(菜单下的Tab) =========================
 // 6. tab清单
 export const reqGetTabList = () => ajax(BASE + '/tab-list')
