@@ -34,6 +34,8 @@ function ImageForm(props) {
   let originFormData = props.location.state;
 
   const onFinish = async values => {
+    // 修改存储的一级类别的名称
+    values.class_type = values.class_type.toLowerCase()
     // 更新
     if (originFormData && originFormData.id) {
       let res = await reqUpdateImageCardById(originFormData.id, values)
